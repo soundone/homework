@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Stylish&amp;display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    for (let i = 0; i < response.length; i++) {
+                        if (response[i]['name'] == 'USDKRW=X') {
+                            $('#exchange-show').text(response[i]['rate']);
+                            return;
+                        }
+                    }
+                }
+            })
+        })
+
+            function order() {
+                let name = $('#order-name').val();
+                let count = $('#order-count').val();
+                let address = $('#order-address').val();
+                let number = $('#order-number').val();
+
+                if (name == '') {
+                    alert('이름을 입력해주세요')
+                } else if (count == '') {
+                    alert('수량을 선택해주세요')
+                } else if (address == '') {
+                    alert('주소를 입력해주세요')
+                } else if (number == '') {
+                    alert('전화번호를 입력해주세요')
+                } else {
+                    alert('주문이 완료되었습니다')
+                }
+            }
+
+    </script>
+    <style>
+
+        * {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .title-box-type {
+            width: 500px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .font-title-type {
+            font-size: 15 p;
+        }
+
+        .input-group-box {
+            width: 500px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .exchang-text {
+            width: 500px;
+            margin: auto;
+            color: blue;
+
+        }
+
+        h3, h5 {
+            display: inline;
+        }
+
+    </style>
+    <title>스파르타코딩클럽 | 숙제 1 </title>
+</head>
+
+<body>
+<div class="title-box-type">
+    <img src="https://thumb.mt.co.kr/06/2018/07/2018070411134940004_1.jpg" class="img-fluid" alt="width 500px">
+</div>
+<div class="title-box-type">
+    <div class="font-title-type">
+        <h3> 양초를 팝니다 </h3>
+        <h5> 가격 : 3,000원 / 개 </h5>
+        <p> 이 양초는 테스트를 위해 만들어졌으며 꽃집에서 맡으실 수 있는 향으로 인기가 많습니다. 수량은 1개, 3개, 5개씩 구매할 수 있습니다. </p>
+    </div>
+</div>
+<div class="exchang-text">
+    <p> "달러-원 환율 : <span id='exchange-show'> 1000 </span>" </p>
+</div>
+<div class="input-group-box">
+    <div class="input-group-prepend">
+        <span class="input-group-text"> 주문자이름 </span>
+        <input type="text" class="form-control" id="order-name" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <p></p>
+    <div class="input-group-prepend">
+        <label class="input-group-text for=" inputGroupSelect01"> 수량 </label>
+        <select class="custom-select" id="order-count">
+            <option selected> ----수량을 선택하세요---</option>
+            <option value="1">1</option>
+            <option value="2">3</option>
+            <option value="3">5</option>
+        </select>
+    </div>
+    <p></p>
+    <div class="input-group-prepend">
+        <span class="input-group-text"> 주소 </span>
+        <input type="text" class="form-control" id="order-address" aria-label="Username"
+               aria-describedby="basic-addon1">
+    </div>
+    <p></p>
+    <div class="input-group-prepend">
+        <span class="input-group-text"> 전화번호 </span>
+        <input type="text" class="form-control" id="order-number" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <p></p>
+    <div class="order">
+        <button type="button" class="btn btn-primary" onclick="order()"> 주문하기</button>
+    </div>
+</div>
+</body>
+</html>
